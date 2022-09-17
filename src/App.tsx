@@ -1,16 +1,20 @@
-import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
+import Counter from './features/counter/Counter';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img
+          src={logo}
+          className="App
+          -logo"
+          alt="logo"
+        />
         <Counter />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Edit <code>src/App .tsx</code> and save to r eload.
         </p>
         <span>
           <span>Learn </span>

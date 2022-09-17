@@ -1,46 +1,101 @@
-# Getting Started with Create React App
+Eslint et Prettier
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+npm i -D eslint
 
-## Available Scripts
+npx eslint —init
 
-In the project directory, you can run:
+- check syntax and find problems
+- JS import and exports
+- React
+- TS yes
+- Browser …
 
-### `npm start`
+LOOK AT:
+Airbnb style guide
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Pour ne pas configurer eslint manuellement on peut s’inspirer de la config d’AirBB
+https://www.npmjs.com/package/eslint-config-airbnb
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+npx install-peerdeps --dev eslint-config-airbnb
+permet d’installer tout ce qu’il nous faut avec les autres package eslint tel que eslint react hook….
 
-### `npm test`
+eslint-config-airbnb/hooks
+This entry point enables the linting rules for React hooks (requires v16.8+). To use, add "extends": ["airbnb", "airbnb/hooks"] to your .eslintrc.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+puis:
+https://www.npmjs.com/package/eslint-config-airbnb-typescript
 
-### `npm run build`
+npm install eslint-config-airbnb-typescript \
+ @typescript-eslint/eslint-plugin@^5.13.0 \
+ @typescript-eslint/parser@^5.0.0 \
+ --save-dev
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Configure ESLint
+Within your ESLint config file:
+extends: [
+'airbnb',
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 'airbnb-typescript'
+  ]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This config requires knowledge of your TypeScript config.
+In your ESLint config, set parserOptions.project to the path of your tsconfig.json.
+For example:
+{
+extends: ['airbnb', 'airbnb-typescript'],
 
-### `npm run eject`
+- parserOptions: {
+- project: './tsconfig.json'
+- }
+  }
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+cmd shift p Reload window (reload ts et eslint server)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+On doit dire à TS de regarder eslint
+Dans tsconfig.json:
+dans le include:
+“.eslintrc.js?” (voir si bonne extension)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+cmd shift p Reload window (reload ts et eslint server)
+cmd shift p eslint fix all auto-fixable problems (corrige auto les pb)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+cmd + . on peut dans un ficheir sur une erreur permet d’importer un eslint-disable par exemple
+par exemple le eslint veut qu’on import React from react mais dans certains fichiers on n’en a pas besoin…
 
-## Learn More
+ça affiche aussi le rule name qu’on peut copier coller dans la config -> eslintrc -> rules,
+coller ‘’react/react-in-jsx-sxope’: 0 (pour turn off cette règle)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Err: React must be in the scope:
+dans eslintrc:
+rules:
+‘react/react-in-jsx-scope’: 0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+———————————————————
+
+PRETTIER:
+
+auto formatting
+
+npm i -D prettier eslint-config-prettier eslint-plugin-prettier
+
+dans .prettierrc.js
+
+// prettier.config.js or .prettierrc.js
+module.exports = {
+trailingComma: "es5",
+tabWidth: 2,
+semi: true,
+singleQuote: true,
+};
+
+Dans eslintrc:
+dans plugins:
+ajouter:
+‘prettier’
+et dans extends:
+ajouter:
+‘plugin:prettier/recommended’
+
+Etre sur qu’a chaq fois quon change la config Fermer/ouvrir Vscode pour qu’il prenne les changements en compte!
+-> cmd shift p Reload window (reload ts et eslint server)
+cmd shift p eslint fix all auto-fixable problems (corrige auto les pb)
